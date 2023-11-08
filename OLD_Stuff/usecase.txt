@@ -1,0 +1,17 @@
+- Network
+- GUI
+  - Add node
+  - Delete node
+  - Show information
+- Gateway
+  - Receive data
+  - Forward data
+- Nodes
+  - Send data
+  
+@startuml
+actor User
+(Add Node)
+(Delete Node)
+(Show Information)
+@enduml

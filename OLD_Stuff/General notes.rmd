@@ -1,0 +1,40 @@
+# Project 3: Simulator for wireless communication
+
+## Use-case
+
+- 1 gateway
+- Many nodes that are IoT devices
+
+> An IoT `network` is **simulated** in a `GUI`, where a `gateway` is **placed** in the middle, and `nodes` can be **placed** around it. The `nodes` **send** `data` through the `gateway`, to somewhere on the `internet`. The `GUI` can **show** `information` relevant to the `network` health.
+
+<div style="width: 480px; height: 360px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:480px; height:360px" src="https://lucid.app/documents/embedded/f4db6b94-e36f-4ea7-b3fd-291768914556" id="RaNyYFAIXmQ~"></iframe></div>
+
+
+### Objects and their methods
+
+- Network
+- GUI
+  - Add node
+  - Delete node
+  - Show information
+- Gateway
+  - Receive data
+  - Forward data
+- Nodes
+  - Send data
+
+### Considerations
+
+- Handle collision or just know it happened (collision avoidance vs. collision detection)?
+- Perhaps implement random access first, and then if interesting/we have time, implement a protocol.
+
+## Analysis
+
+### Nodes
+
+- What is a block of data? 
+- Is the transmission a method or an attribute?
+- 
+
+### Gateway
+
