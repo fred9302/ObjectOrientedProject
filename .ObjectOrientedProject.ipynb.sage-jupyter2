@@ -1,0 +1,5 @@
+{"backend_state":"ready","kernel":"python3-ubuntu","kernel_state":"idle","kernel_usage":{"cpu":0,"memory":0},"metadata":{"colab":{"authorship_tag":"ABX9TyM6iaclpvgqxdwnDT2IKTDm","include_colab_link":true,"provenance":[]},"language_info":{"name":"python"}},"type":"settings"}
+{"cell_type":"code","id":"604dd3","input":"","metadata":{"id":"SDnY1GQJBhJT"},"pos":1,"state":"done","type":"cell"}
+{"cell_type":"markdown","id":"dad38f","input":"<a href=\"https://colab.research.google.com/github/fred9302/ObjectOrientedProject/blob/main/ObjectOrientedProject.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>","metadata":{"colab_type":"text","id":"view-in-github"},"pos":0,"state":"done","type":"cell"}
+{"id":0,"time":1699609638726,"type":"user"}
+{"last_load":1699609638860,"type":"file"}

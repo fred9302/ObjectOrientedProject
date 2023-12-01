@@ -20,7 +20,7 @@
 
 [Use case diagram link](https://lucid.app/lucidchart/f4db6b94-e36f-4ea7-b3fd-291768914556/edit?viewport_loc=-861%2C-53%2C2700%2C1400%2C.Q4MUjXso07N&invitationId=inv_7fd65a4d-01b7-413e-aac4-9303be33da65)
 
-[Domain model link](https://lucid.app/lucidchart/3e0f91a6-954e-41bd-acbc-81f5e3876da9/edit?viewport_loc=-689%2C-220%2C2700%2C1400%2C0_0&invitationId=inv_ee6e331d-06f7-4ed6-a67d-f7d2be579261)
+[Domain model link](https://lucid.app/lucidchart/3e0f91a6-954e-41bd-acbc-81f5e3876da9/edit?viewport_loc=-49%2C190%2C1815%2C956%2C0_0&invitationId=inv_ee6e331d-06f7-4ed6-a67d-f7d2be579261)
 
 [Class diagram link](https://lucid.app/lucidchart/c063cbe8-86a5-468a-8711-1662978fabb0/edit?view_items=~PRykaqnz1hy&invitationId=inv_96b03faf-6b01-4af4-9152-576b23904d31)
 
