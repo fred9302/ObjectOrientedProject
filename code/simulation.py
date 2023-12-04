@@ -5,12 +5,45 @@ class simulation:
     def __init__(self):
         self.data = None
         self.dBconn = None
+        self.clock = None
             
     def get_data(self):
         return self.data
             
     def set_data(self, new_data):
         self.data = new_data
+        
+    def add_time(self, time = 0, print_time = False):
+        """
+        Adds a specified amount of time to the current clock value.
+        
+        Parameters:
+            time (int, optional): The amount of time to add to the current clock value. Defaults to 0.
+        
+        Raises:
+            Exception: If the specified time is less than 0.
+        """
+        if self.clock is None:
+            self.clock = 0
+        
+        if time >= 0:
+            self.clock += time
+            if print_time is True:
+                print(self.clock)
+        else:    
+            raise Exception('Time must be greater than or equal to 0')
+        
+    
+    def start_simulation(self):
+        """
+        Starts the simulation.
+
+        This function does not take any parameters.
+
+        Returns:
+            None
+        """
+        self.add_time(time = 3)
         
         
     def db_config(self, filename='/home/frederik/GitHub/ObjectOrientedProject/code/database.ini', section='postgresql'):
