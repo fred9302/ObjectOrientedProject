@@ -7,6 +7,7 @@ class simulation:
         self.clock = None
         self.grid = None
         self.verbose = None
+        self.next_ip = 0
         
     def add_time(self, time = 0, print_time = False):
         """
@@ -56,6 +57,13 @@ class simulation:
         else:
             raise Exception('Rows and columns must be greater than or equal to 0')
     
+    def get_ip(self):
+        """
+        Returns the next available IP address.
+        """
+        self.next_ip += 1
+        return self.next_ip
+    
     set_verbose = lambda self, new_verbose: setattr(self, 'verbose', new_verbose)
     """
     This code defines a lambda function called set_verbose that takes two parameters: self and new_verbose.
@@ -66,3 +74,18 @@ class simulation:
     def start_simulation(self, columns = 0, rows = 0):
         print('Starting simulation...')
         self.__create_grid(columns, rows, self.verbose)
+        
+
+class network:
+    def __init__(self):
+        self.devices = []
+        self.netmask = (255, 255, 255, 0)
+        
+class device:
+    def __init__(self):
+        self.ip = None
+        
+    def establish_connection(self, network):
+        print('Establishing connection...')
+        network.devices.append(self)
+        print('Connection established.')
