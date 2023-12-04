@@ -7,6 +7,7 @@ class simulation:
         self.dBconn = None
         self.clock = None
         self.grid = None
+        self.verbose = None
             
     def get_data(self):
         return self.data
@@ -62,9 +63,11 @@ class simulation:
         else:
             raise Exception('Rows and columns must be greater than or equal to 0')
     
-    def start_simulation(self, columns = 0, rows = 0):
+    def start_simulation(self, columns = 0, rows = 0, verbose = False):
         print('Starting simulation...')
-        self.__create_grid(columns, rows, print_grid = True)
+        if verbose is True:
+            self.verbose = True
+        self.__create_grid(columns, rows, self.verbose)
         
         
     def db_config(self, filename='/home/frederik/GitHub/ObjectOrientedProject/code/database.ini', section='postgresql'):
