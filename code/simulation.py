@@ -63,10 +63,15 @@ class simulation:
         else:
             raise Exception('Rows and columns must be greater than or equal to 0')
     
-    def start_simulation(self, columns = 0, rows = 0, verbose = False):
+    set_verbose = lambda self, new_verbose: setattr(self, 'verbose', new_verbose)
+    """
+    This code defines a lambda function called set_verbose that takes two parameters: self and new_verbose.
+    
+    It uses the setattr function to set the verbose attribute of the object self to the value of new_verbose.
+    """
+    
+    def start_simulation(self, columns = 0, rows = 0):
         print('Starting simulation...')
-        if verbose is True:
-            self.verbose = True
         self.__create_grid(columns, rows, self.verbose)
         
         
