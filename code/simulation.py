@@ -1,3 +1,5 @@
+import gui
+
 class simulation:
     def __init__(self):
         self.dBconn = None
@@ -68,27 +70,23 @@ class simulation:
     It uses the setattr function to set the verbose attribute of the object self to the value of new_verbose.
     """
     
-    def start_simulation(self, columns = 0, rows = 0):
+    def start_simulation(self, columns = 0, rows = 0, connections = 0):
         print('Starting simulation...')
         self.__create_grid(columns, rows, self.verbose)
-
-class gui:
-    def __init__(self):
-        pass
-    
-    def add_node(self, node):
-        pass
-    
-    def add_node(self, node):
-        pass
-    
-    def show_information(self):
-        pass
+        net = network()
+        for i in range(connections):
+            net.connect(self.get_ip())
 
 class network:
     def __init__(self):
         self.connections = []
+        self.temp_ip = None
         self.netmask = (255, 255, 255, 0)
+    
+    def connect(self, ip = None): # if this method is called from simulation method sim must be self
+        self.temp_ip = ip
+        self.connections.append(self.temp_ip)
+        print(f"{self.temp_ip} is connected to {self.connections}")
         
 class device:
     def __init__(self):
