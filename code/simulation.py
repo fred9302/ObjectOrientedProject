@@ -1,6 +1,3 @@
-import psycopg2
-from configparser import ConfigParser
-
 class simulation:
     def __init__(self):
         self.dBconn = None
@@ -74,11 +71,23 @@ class simulation:
     def start_simulation(self, columns = 0, rows = 0):
         print('Starting simulation...')
         self.__create_grid(columns, rows, self.verbose)
-        
+
+class gui:
+    def __init__(self):
+        pass
+    
+    def add_node(self, node):
+        pass
+    
+    def add_node(self, node):
+        pass
+    
+    def show_information(self):
+        pass
 
 class network:
     def __init__(self):
-        self.devices = []
+        self.connections = []
         self.netmask = (255, 255, 255, 0)
         
 class device:
@@ -89,3 +98,24 @@ class device:
         print('Establishing connection...')
         network.devices.append(self)
         print('Connection established.')
+        
+class node(device):
+    def __init__(self):
+        self.state = None
+    
+
+class gateway(device, network):
+    def __init__(self):
+        self.received_data = None
+    
+    def receive_data(self, data):
+        """
+        Set the received data attribute.
+        
+        Args:
+            data: The data to be set as the received data attribute.
+        
+        Returns:
+            None
+        """
+        self.received_data = data

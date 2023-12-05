@@ -1,8 +1,8 @@
-import simulation as netSim
+import simulation as net_sim
 
 
 if __name__ == '__main__':
-    sim = netSim.simulation();
+    sim = net_sim.simulation();
     
     x = int(input("Enter number of columns: "))
     y = int(input("Enter number of rows: "))
