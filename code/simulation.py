@@ -57,14 +57,14 @@ class simulation:
         else:
             print('Rows and columns must be greater than 0')
     
-    def get_next_ip(self):
+    def __get_next_ip(self):
         """
         Iterates next_ip and returns the next available IP address.
         """
         self.next_ip += 1
         return self.next_ip
     
-    def get_ip(self):
+    def __get_ip(self):
         """
         Returns the value of variable next_ip which is the next available IP address.
         """
@@ -83,28 +83,25 @@ class simulation:
         
         # create gateway
         net = gateway()
-        net.set_ip(self.get_next_ip())
+        net.set_ip(self.__get_next_ip())
         if self.verbose == True:
             print(f"Gateway with IP {net.get_ip()} has been created")
         
         # establish connections with nodes
         for i in range(connections):
-            net.connect(ip = self.get_next_ip())
+            net.connect(ip = self.__get_next_ip())
             self.nodes.append(node())
-            self.nodes[i].set_ip(self.get_ip())
+            self.nodes[i].set_ip(self.__get_ip())
             if self.verbose == True:
                 print(f"Node {i} with IP {self.nodes[i].get_ip()} is connected to the gateway with IP {net.get_ip()}")
 
 class network:
     def __init__(self):
         self.connections = []
-        self.temp_ip = None
         self.netmask = (255, 255, 255, 0)
     
     def connect(self, ip = None): # if this method is called from simulation method sim must be self
-        self.temp_ip = ip
-        self.connections.append(self.temp_ip)
-        #print(f"{self.temp_ip} is connected to {self.connections}")
+        self.connections.append(ip)
         
 class device:
     def __init__(self):
@@ -166,6 +163,7 @@ class device:
     
 class node(device):
     def __init__(self):
+        super().__init__()
         self.state = None
         
     def set_state(self, state = False):
@@ -192,7 +190,7 @@ class node(device):
 
 class gateway(network, device):
     def __init__(self):
-        super().__init__()
+        super(network, device).__init__()
         self.received_data = None
     
     def receive_data(self, data):
