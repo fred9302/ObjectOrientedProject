@@ -34,5 +34,7 @@ class gui:
         else:
             print('Minimum number of nodes reached.')
     
+    
+    
     def show_information(self):
         pass
