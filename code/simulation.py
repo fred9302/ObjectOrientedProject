@@ -7,6 +7,7 @@ class simulation:
         self.grid = None
         self.verbose = None
         self.next_ip = 0
+        self.nodes = []
         
     def add_time(self, time = 0, print_time = False):
         """
@@ -47,20 +48,26 @@ class simulation:
         Returns:
             None
         """
-        if rws >= 0 and cols >= 0:
+        if rws > 0 and cols > 0:
             self.grid = [[0 for i in range(cols)] for j in range(rws)]
             if print_grid is True:
                 print('Grid:')
                 for i in range(rws):
                     print(self.grid[i])
         else:
-            raise Exception('Rows and columns must be greater than or equal to 0')
+            print('Rows and columns must be greater than 0')
+    
+    def get_next_ip(self):
+        """
+        Iterates next_ip and returns the next available IP address.
+        """
+        self.next_ip += 1
+        return self.next_ip
     
     def get_ip(self):
         """
-        Returns the next available IP address.
+        Returns the value of variable next_ip which is the next available IP address.
         """
-        self.next_ip += 1
         return self.next_ip
     
     set_verbose = lambda self, new_verbose: setattr(self, 'verbose', new_verbose)
@@ -70,12 +77,23 @@ class simulation:
     It uses the setattr function to set the verbose attribute of the object self to the value of new_verbose.
     """
     
-    def start_simulation(self, columns = 0, rows = 0, connections = 0):
+    def start_simulation(self, grid = (0, 0), connections = 0):
         print('Starting simulation...')
-        self.__create_grid(columns, rows, self.verbose)
-        net = network()
+        self.__create_grid(grid[0], grid[1], self.verbose)
+        
+        # create gateway
+        net = gateway()
+        net.set_ip(self.get_next_ip())
+        if self.verbose == True:
+            print(f"Gateway with IP {net.get_ip()} has been created")
+        
+        # establish connections with nodes
         for i in range(connections):
-            net.connect(self.get_ip())
+            net.connect(ip = self.get_next_ip())
+            self.nodes.append(node())
+            self.nodes[i].set_ip(self.get_ip())
+            if self.verbose == True:
+                print(f"Node {i} with IP {self.nodes[i].get_ip()} is connected to the gateway with IP {net.get_ip()}")
 
 class network:
     def __init__(self):
@@ -86,24 +104,95 @@ class network:
     def connect(self, ip = None): # if this method is called from simulation method sim must be self
         self.temp_ip = ip
         self.connections.append(self.temp_ip)
-        print(f"{self.temp_ip} is connected to {self.connections}")
+        #print(f"{self.temp_ip} is connected to {self.connections}")
         
 class device:
     def __init__(self):
         self.ip = None
+        self.position = None
         
-    def establish_connection(self, network):
+    """ def establish_connection(self, network):
         print('Establishing connection...')
         network.devices.append(self)
-        print('Connection established.')
-        
+        print('Connection established.') """
+    
+    def set_ip(self, ip = None):
+        """
+        Sets the IP address for the object.
+
+        Parameters:
+            ip (int): The last number of the IP address to be set. If not provided, no IP address will be set.
+
+        Returns:
+            None
+        """
+        if ip is not None:
+            self.ip = ip
+        else:
+            print('No IP address provided.')
+    
+    def get_ip(self):
+        """
+        Get the IP address.
+
+        Returns:
+            str: The IP address.
+        """
+        return self.ip
+    
+    def set_position(self, position = None):
+        """
+        Sets the position of the object.
+
+        Parameters:
+            position (tuple): The position to be set. If not provided, no position will be set.
+
+        Returns:
+            None
+        """
+        if position is not None:
+            self.position = position
+        else:
+            print('No position provided.')
+            
+    def get_position(self):
+        """
+        Get the position of the object.
+
+        Returns:
+            tuple: The position of the object.
+        """
+        return self.position
+    
 class node(device):
     def __init__(self):
         self.state = None
+        
+    def set_state(self, state = False):
+        """
+        Set the state of the object to the given state.
+
+        Parameters:
+            state (any): The new state to set.
+
+        Returns:
+            None
+        """
+        self.state = state
+    
+    def get_state(self):
+        """
+        Get the current state of the object.
+        
+        Returns:
+            The current state of the object.
+        """
+        return self.state
     
 
-class gateway(device, network):
+class gateway(network, device):
     def __init__(self):
+        super().__init__()
         self.received_data = None
     
     def receive_data(self, data):
