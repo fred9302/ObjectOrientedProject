@@ -1,4 +1,5 @@
 import gui
+import random
 
 class simulation:
     def __init__(self):
@@ -8,6 +9,7 @@ class simulation:
         self.verbose = None
         self.next_ip = 0
         self.nodes = []
+        self.positions = []
         
     def add_time(self, time = 0, print_time = False):
         """
@@ -51,11 +53,20 @@ class simulation:
         if rws > 0 and cols > 0:
             self.grid = [[0 for i in range(cols)] for j in range(rws)]
             if print_grid is True:
-                print('Grid:')
-                for i in range(rws):
-                    print(self.grid[i])
+                self.__print_grid()
         else:
-            print('Rows and columns must be greater than 0')
+            exit('Rows and columns must be greater than 0')
+    
+    def __print_grid(self):
+        """
+        Prints the grid.
+        """
+        print('\nGrid:')
+        for i in range(len(self.grid)):
+            if i == len(self.grid) - 1:
+                print(f'{self.grid[i]}\n')
+            else:
+                print(self.grid[i])
     
     def __get_next_ip(self):
         """
@@ -77,15 +88,59 @@ class simulation:
     It uses the setattr function to set the verbose attribute of the object self to the value of new_verbose.
     """
     
+    def __generate_positions(self, columns = 0, rows = 0, devices = 0):
+        """
+        Generates positions for the nodes in the grid.
+        """
+        
+        # check whether amount of nodes can fit in grid
+        if devices >= columns * rows:
+            exit('Error: Too many nodes. Please choose a number of nodes that is less than the number of columns and rows in the grid.')
+        
+        position_gen = []
+        position_gen.append(list(range(0, columns)))
+        position_gen.append(list(range(0, rows)))
+        
+        #generate positions
+        for i in range(devices):
+            # check if position is not already taken
+            check = False
+            
+            while check is False:
+                temp_position = None
+                x = None
+                y = None
+                
+                
+                # choose 2 random coordinates from lists of possible coordinates
+                x = int(random.choice(position_gen[0]))
+                y = int(random.choice(position_gen[1]))
+                temp_position = (x, y)
+                
+                if temp_position in self.positions:
+                    print(f'\nPosition ({temp_position[0]}, {temp_position[1]}) is already taken!\n')
+                    check = False
+                else:
+                    check = True
+            
+            #print(f'Node {i} with IP {i + 2} has position ({temp_position[0]}, {temp_position[1]})')
+            self.positions.append((temp_position[0], temp_position[1]))
+    
     def start_simulation(self, grid = (0, 0), connections = 0):
-        print('Starting simulation...')
+        print('\n\nStarting simulation...')
         self.__create_grid(grid[0], grid[1], self.verbose)
         
         # create gateway
         net = gateway()
         net.set_ip(self.__get_next_ip())
+        
+        # set position of the gateway in the middle of the grid
+        self.positions.append((int(grid[0]/2 - 1), int(grid[1]/2 - 1)))
+        net.set_position(self.positions[0])
+        self.grid[self.positions[0][1]][self.positions[0][0]] = net.get_ip()
         if self.verbose == True:
-            print(f"Gateway with IP {net.get_ip()} has been created")
+            print(f"Gateway with IP {net.get_ip()} has been created\n")
+        
         
         # establish connections with nodes
         for i in range(connections):
@@ -93,12 +148,23 @@ class simulation:
             self.nodes.append(node())
             self.nodes[i].set_ip(self.__get_ip())
             if self.verbose == True:
-                print(f"Node {i} with IP {self.nodes[i].get_ip()} is connected to the gateway with IP {net.get_ip()}")
+                print(f"{self.nodes[i].get_name()} with IP {self.nodes[i].get_ip()} is connected to {net.get_name()} with IP {net.get_ip()}")
+        
+        # set positions of nodes
+        self.__generate_positions(columns = grid[0], rows = grid[1], devices = connections)
+        for i in range(connections):
+            self.nodes[i].set_position(self.positions[i + 1])
+            self.grid[self.positions[i + 1][1]][self.positions[i + 1][0]] = self.nodes[i].get_ip()
+        if self.verbose == True:
+            self.__print_grid()
+        
+        print(f'\nPositions: {self.positions}')
 
 class network:
     def __init__(self):
         self.connections = []
         self.netmask = (255, 255, 255, 0)
+        super().__init__()
     
     def connect(self, ip = None): # if this method is called from simulation method sim must be self
         self.connections.append(ip)
@@ -106,7 +172,11 @@ class network:
 class device:
     def __init__(self):
         self.ip = None
+        self.type = None
         self.position = None
+        self.type = None
+        self.name = None
+        super().__init__()
         
     """ def establish_connection(self, network):
         print('Establishing connection...')
@@ -125,6 +195,10 @@ class device:
         """
         if ip is not None:
             self.ip = ip
+            if self.type == 0:
+                self.name = f'Gateway {self.ip - 1}'
+            elif self.type == 1:
+                self.name = f'Node {self.ip - 2}'
         else:
             print('No IP address provided.')
     
@@ -133,7 +207,7 @@ class device:
         Get the IP address.
 
         Returns:
-            str: The IP address.
+            int: The IP address.
         """
         return self.ip
     
@@ -149,6 +223,7 @@ class device:
         """
         if position is not None:
             self.position = position
+            print (f'{self.name} with IP {self.ip} has position ({self.position[0]}, {self.position[1]})')
         else:
             print('No position provided.')
             
@@ -161,10 +236,20 @@ class device:
         """
         return self.position
     
+    def get_name(self):
+        """
+        Get the name of the object.
+
+        Returns:
+            str: The name of the object.
+        """
+        return self.name
+    
 class node(device):
     def __init__(self):
         super().__init__()
         self.state = None
+        self.type = 1
         
     def set_state(self, state = False):
         """
@@ -190,8 +275,9 @@ class node(device):
 
 class gateway(network, device):
     def __init__(self):
-        super(network, device).__init__()
+        super().__init__()
         self.received_data = None
+        self.type = 0
     
     def receive_data(self, data):
         """
@@ -204,3 +290,4 @@ class gateway(network, device):
             None
         """
         self.received_data = data
+

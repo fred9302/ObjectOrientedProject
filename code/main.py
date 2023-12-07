@@ -7,24 +7,23 @@ if __name__ == '__main__':
     
     # input grid size
     x = int(input("Enter number of columns: "))
-    y = int(input("Enter number of rows: "))
+    y = int(input("\nEnter number of rows: "))
     grid_size = (x, y)
     
     # specify number of nodes
     if gui.no_nodes == 0:
-        print("Ignoring number of nodes from GUI")
-        devices = int(input("Enter number of devices: "))
+        print("\nIgnoring number of nodes from GUI")
+        devices = int(input("\nEnter number of devices: "))
     else:
         devices = gui.no_nodes
     
     # ask if verbose or not
-    debug = str(input("Verbose? y/n: "))
+    debug = str(input("\nVerbose? y/n: "))
     if debug == 'y':
         sim.set_verbose(True)
     elif debug == 'n':
         sim.set_verbose(False)
     else:
-        print("Invalid input")
-        exit()
+        exit("\nInvalid input")
     
     sim.start_simulation(grid_size, devices);
