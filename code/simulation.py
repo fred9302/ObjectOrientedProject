@@ -1,15 +1,16 @@
 import gui
 import random
+import math
 
 class simulation:
     def __init__(self):
-        self.dBconn = None
         self.clock = None
         self.grid = None
         self.verbose = None
         self.next_ip = 0
         self.nodes = []
         self.positions = []
+        self.net_metrics = dict()
         
     def add_time(self, time = 0, print_time = False):
         """
@@ -118,13 +119,31 @@ class simulation:
                 temp_position = (x, y)
                 
                 if temp_position in self.positions:
-                    print(f'\nPosition ({temp_position[0]}, {temp_position[1]}) is already taken!\n')
+                    print(f'\nError for node {i} with IP {i + 2}: Position ({temp_position[0]}, {temp_position[1]}) is already taken!\n')
                     check = False
                 else:
                     check = True
             
             #print(f'Node {i} with IP {i + 2} has position ({temp_position[0]}, {temp_position[1]})')
             self.positions.append((temp_position[0], temp_position[1]))
+    
+    def __save_metrics(self, ip, throughput, packet_loss, delay):
+        self.net_metrics[ip] = {'throughput': throughput, 'packet_loss': packet_loss, 'delay': delay}
+    
+    
+    def __generate_statistics(self):
+        print('')
+        for node in range(len(self.nodes)):
+            # the following metrics are somewhat based on esp32 performance from: https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html
+            throughput = 30 - random.randint(1, 10) # MB/s
+            packet_loss = len(self.nodes) - random.randint(1, len(self.nodes)) # %
+            distance = math.sqrt((self.positions[node + 1][0] - self.positions[0][0])**2 + (self.positions[node + 1][1] - self.positions[0][1])**2)
+            delay = float(10.0 + random.uniform(0.0, distance)) # ms
+            
+            print(f"Metrics for node {node}: Throughput = {throughput} MB/s, packet loss = {packet_loss}%, delay = {'%.2f' % delay} ms")
+            
+            self.__save_metrics(self.nodes[node].get_ip(), throughput, packet_loss, delay)
+        print('')
     
     def start_simulation(self, grid = (0, 0), connections = 0):
         print('\n\nStarting simulation...')
@@ -135,7 +154,7 @@ class simulation:
         net.set_ip(self.__get_next_ip())
         
         # set position of the gateway in the middle of the grid
-        self.positions.append((int(grid[0]/2 - 1), int(grid[1]/2 - 1)))
+        self.positions.append((int(grid[0]/2), int(grid[1]/2)))
         net.set_position(self.positions[0])
         self.grid[self.positions[0][1]][self.positions[0][0]] = net.get_ip()
         if self.verbose == True:
@@ -159,6 +178,9 @@ class simulation:
             self.__print_grid()
         
         print(f'\nPositions: {self.positions}')
+        
+        self.__generate_statistics()
+        
 
 class network:
     def __init__(self):
