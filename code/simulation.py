@@ -1,4 +1,3 @@
-import gui
 import random
 import math
 
@@ -10,6 +9,7 @@ class simulation:
         self.nodes = []
         self.positions = []
         self.net_metrics = dict()
+        self.avg_metrics = dict()
         
     def add_time(self, time = 0, print_time = False):
         """
@@ -139,9 +139,20 @@ class simulation:
             delay (float): The delay value for the IP address.
         """
         self.net_metrics[ip] = {'throughput': throughput, 'packet_loss': packet_loss, 'delay': delay}
+
+    def get_net_metrics(self):
+        """
+        Returns the metrics for the nodes in the network.
+        """
+        return self.net_metrics
     
+    def get_avg_metrics(self):
+        """
+        Returns the average metrics for the nodes in the network.
+        """
+        return self.avg_metrics
     
-    def __generate_statistics(self):
+    def __generate_metrics(self):
         """
         Generates statistics for the nodes in the network.
 
@@ -168,6 +179,12 @@ class simulation:
             self.__save_metrics(self.nodes[node].get_ip(), throughput, packet_loss, delay)
         if self.verbose is True:
             print('')
+        
+        # calculate average metrics
+        self.avg_metrics['throughput'] = sum(self.net_metrics[node]['throughput'] for node in self.net_metrics) / len(self.net_metrics)
+        self.avg_metrics['packet_loss'] = sum(self.net_metrics[node]['packet_loss'] for node in self.net_metrics) / len(self.net_metrics)
+        self.avg_metrics['delay'] = sum(self.net_metrics[node]['delay'] for node in self.net_metrics) / len(self.net_metrics)
+        print(f"\nAverage metrics: Throughput = {self.avg_metrics['throughput']} MB/s, packet loss = {self.avg_metrics['packet_loss']}%, delay = {'%.2f' % self.avg_metrics['delay']} ms")
     
     def start_simulation(self, grid = (0, 0), connections = 0):
         print('\n\nStarting simulation...\n')
@@ -205,7 +222,7 @@ class simulation:
         print(f'\nPositions: {self.positions}')
         
         
-        self.__generate_statistics()
+        self.__generate_metrics()
         
 
 class network:

@@ -15,7 +15,7 @@ if __name__ == '__main__':
         print("\nIgnoring number of nodes from GUI")
         devices = int(input("\nEnter number of devices: "))
     else:
-        devices = gui.no_nodes
+        devices = gui.nodes
     
     # ask if verbose or not
     debug = str(input("\nVerbose? y/n: "))
