@@ -33,8 +33,15 @@ class gui:
             self.no_nodes -= 1
         else:
             print('Minimum number of nodes reached.')
-    
-    
-    
-    def show_information(self):
-        pass
+
+    def get_nodes(self):
+        """
+        Returns the number of nodes in the network.
+
+        Parameters:
+            None
+
+        Returns:
+            int: The number of nodes in the network.
+        """
+        return self.no_nodes

@@ -4,7 +4,6 @@ import math
 
 class simulation:
     def __init__(self):
-        self.clock = None
         self.grid = None
         self.verbose = None
         self.next_ip = 0
@@ -119,20 +118,43 @@ class simulation:
                 temp_position = (x, y)
                 
                 if temp_position in self.positions:
-                    print(f'\nError for node {i} with IP {i + 2}: Position ({temp_position[0]}, {temp_position[1]}) is already taken!\n')
+                    if self.verbose is True:
+                        print(f'\nError for node {i} with IP {i + 2}: Position ({temp_position[0]}, {temp_position[1]}) is already taken!\n')
                     check = False
                 else:
                     check = True
             
-            #print(f'Node {i} with IP {i + 2} has position ({temp_position[0]}, {temp_position[1]})')
+            if self.verbose is True:
+                print(f'Node {i} with IP {i + 2} has position ({temp_position[0]}, {temp_position[1]})')
             self.positions.append((temp_position[0], temp_position[1]))
     
     def __save_metrics(self, ip, throughput, packet_loss, delay):
+        """
+        Saves the metrics for a given IP address.
+
+        Parameters:
+            ip (int): The IP address for which the metrics are being saved.
+            throughput (int): The throughput value for the IP address.
+            packet_loss (int): The packet loss value for the IP address.
+            delay (float): The delay value for the IP address.
+        """
         self.net_metrics[ip] = {'throughput': throughput, 'packet_loss': packet_loss, 'delay': delay}
     
     
     def __generate_statistics(self):
-        print('')
+        """
+        Generates statistics for the nodes in the network.
+
+        This function calculates various metrics for each node in the network, such as throughput, packet loss, distance, and delay. The metrics are based on the ESP32 performance documented in the ESP-IDF WiFi API guide. The metrics are randomly generated within certain ranges.
+
+        Parameters:
+        - None
+
+        Returns:
+        - None
+        """
+        if self.verbose is True:
+            print('')
         for node in range(len(self.nodes)):
             # the following metrics are somewhat based on esp32 performance from: https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html
             throughput = 30 - random.randint(1, 10) # MB/s
@@ -140,13 +162,15 @@ class simulation:
             distance = math.sqrt((self.positions[node + 1][0] - self.positions[0][0])**2 + (self.positions[node + 1][1] - self.positions[0][1])**2)
             delay = float(10.0 + random.uniform(0.0, distance)) # ms
             
-            print(f"Metrics for node {node}: Throughput = {throughput} MB/s, packet loss = {packet_loss}%, delay = {'%.2f' % delay} ms")
+            if self.verbose is True:
+                print(f"Metrics for node {node}: Throughput = {throughput} MB/s, packet loss = {packet_loss}%, delay = {'%.2f' % delay} ms")
             
             self.__save_metrics(self.nodes[node].get_ip(), throughput, packet_loss, delay)
-        print('')
+        if self.verbose is True:
+            print('')
     
     def start_simulation(self, grid = (0, 0), connections = 0):
-        print('\n\nStarting simulation...')
+        print('\n\nStarting simulation...\n')
         self.__create_grid(grid[0], grid[1], self.verbose)
         
         # create gateway
@@ -158,6 +182,7 @@ class simulation:
         net.set_position(self.positions[0])
         self.grid[self.positions[0][1]][self.positions[0][0]] = net.get_ip()
         if self.verbose == True:
+            print (f"Gateway with IP {net.get_ip()} has position ({self.positions[0][0]}, {self.positions[0][1]})\n")
             print(f"Gateway with IP {net.get_ip()} has been created\n")
         
         
@@ -178,6 +203,7 @@ class simulation:
             self.__print_grid()
         
         print(f'\nPositions: {self.positions}')
+        
         
         self.__generate_statistics()
         
@@ -245,7 +271,7 @@ class device:
         """
         if position is not None:
             self.position = position
-            print (f'{self.name} with IP {self.ip} has position ({self.position[0]}, {self.position[1]})')
+            #print (f'{self.name} with IP {self.ip} has position ({self.position[0]}, {self.position[1]})')
         else:
             print('No position provided.')
             
