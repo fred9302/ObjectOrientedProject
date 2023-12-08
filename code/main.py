@@ -5,6 +5,17 @@ if __name__ == '__main__':
     sim = net_sim.simulation()
     gui = net_gui.gui()
     
+    toggle_gui = str(input("\nUse GUI? y/n: "))
+    if toggle_gui == 'y':
+        print("\nStarting GUI...")
+    elif toggle_gui == 'n':
+        print("\nIgnoring GUI...")
+    else:
+        exit("\nInvalid input")
+        
+    if gui.toggle_gui == True:
+        gui.run_gui()
+    
     # input grid size
     x = int(input("Enter number of columns: "))
     y = int(input("\nEnter number of rows: "))

@@ -1,5 +1,6 @@
 import random
 import math
+import gui
 
 class simulation:
     def __init__(self):
