@@ -147,11 +147,18 @@ class simulation:
         """
         return self.net_metrics
     
-    def get_avg_metrics(self):
+    def get_avg_metrics(self, type):
         """
         Returns the average metrics for the nodes in the network.
         """
-        return self.avg_metrics
+        if type == 'throughput':
+            return self.avg_metrics.get(type)
+        elif type == 'packet_loss':
+            return self.avg_metrics.get(type)
+        elif type == 'delay':
+            return self.avg_metrics.get(type)
+        else:
+            return self.avg_metrics
     
     def __generate_metrics(self):
         """
@@ -188,6 +195,16 @@ class simulation:
         print(f"\nAverage metrics: Throughput = {self.avg_metrics['throughput']} MB/s, packet loss = {self.avg_metrics['packet_loss']}%, delay = {'%.2f' % self.avg_metrics['delay']} ms")
     
     def start_simulation(self, grid = (0, 0), connections = 0):
+        """
+        Initializes the simulation by creating a grid, a gateway, and establishing connections with nodes.
+
+        Parameters:
+            grid (tuple): A tuple containing the number of columns and rows for the grid (default is (0, 0)).
+            connections (int): The number of nodes to create and establish connections with (default is 0).
+
+        Returns:
+            None
+        """
         print('\n\nStarting simulation...\n')
         self.__create_grid(grid[0], grid[1], self.verbose)
         
