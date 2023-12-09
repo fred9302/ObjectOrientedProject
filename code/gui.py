@@ -1,4 +1,8 @@
 import pywebio
+from pywebio.input import *
+from pywebio.output import *
+from pywebio.pin import *
+from pywebio import start_server
 #from simulation import simulation
 
 class gui:
@@ -58,22 +62,20 @@ class gui:
         return self.nodes
     
     def __check_nodes(self, data):
-                    """
-                    Checks if the given number of nodes is valid based on the dimensions of the grid.
+        """
+        Check if the given data is valid for the grid.
 
-                    Parameters:
-                    - data: an integer representing the number of nodes.
+        Parameters:
+            data (int): The data to be checked.
 
-                    Returns:
-                    - 'Too many nodes!\nPlease choose a number of nodes that is less than the number of columns and rows in the grid.' if the number of nodes is greater than or equal to the total number of cells in the grid.
-                    - None if the number of nodes is valid.
-                    """
-                    #self.nodes = int(data)
-                    if int(data) >= self.columns * self.rows:
-                        return 'Too many nodes!\nPlease choose a number of nodes that is less than the number of columns and rows in the grid.'
-                    else:
-                        return None
-    
+        Returns:
+            bool or None: Returns False if the data is greater than or equal to the grid size, otherwise returns None.
+        """
+        if data >= self.grid_size[0] * self.grid_size[1]:
+            return f'The number of nodes must be lass than the number of columns multiplied by the number of rows, which is {self.grid_size[0] * self.grid_size[1]}'
+        else:
+            return None
+                    
     def __set_columns(self, col):
         """
         Sets the number of columns in the grid.
@@ -111,19 +113,20 @@ class gui:
         self.grid_size[1] = row
     
     def gui_handler(self):
-        data = pywebio.input.input_group("Start parameters",[
-            pywebio.input('Input number of columns in the grid', name='columns', type=pywebio.NUMBER, required = True, placeholder = '0', validate = self.__set_columns),
-            pywebio.input('Input number of rows in the grid', name='rows', type=pywebio.NUMBER, required = True, placeholder = '0', validate = self.__set_rows),
-            pywebio.input('Input the number of nodes in the network', name='nodes', type=pywebio.NUMBER, required = True, placeholder = '0', validate = self.__check_nodes),
+        data = input_group("Start parameters",[
+            put_input('Input number of columns in the grid', name='columns', type=NUMBER, required = True, placeholder = '0', validate = self.__set_columns),
+            put_input('Input number of rows in the grid', name='rows', type=NUMBER, required = True, placeholder = '0', validate = self.__set_rows),
+            put_input('Input the number of nodes in the network', name='nodes', type=NUMBER, required = True, placeholder = '0', validate = self.__check_nodes),
         ])
+        self.devices = data['nodes']
         
         self.sim.start_simulation((data['columns'], data['rows']), data['nodes'])
         
-        pywebio.put_text(f"Average throughput: {self.sim.get_avg_metrics('throughput')} MB/s")
-        pywebio.put_text(f"Average packet loss: {self.sim.get_avg_metrics('packet_loss')} %")
-        pywebio.put_text(f"Average delay: {self.sim.get_avg_metrics('delay')} ms")
+        put_text(f"Average throughput: {self.sim.get_avg_metrics('throughput')} MB/s")
+        put_text(f"Average packet loss: {self.sim.get_avg_metrics('packet_loss')} %")
+        put_text(f"Average delay: {self.sim.get_avg_metrics('delay')} ms")
     
-    start_gui = lambda self: pywebio.start_server(self.gui_handler, port=8080)
+    start_gui = lambda self: start_server(self.gui_handler, port=8080)
     """
     Starts the web interface.
     

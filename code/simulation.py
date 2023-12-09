@@ -1,6 +1,7 @@
 import random
 import math
-import gui
+import networkx as nx
+import matplotlib.pyplot as plt
 
 class simulation:
     def __init__(self):
@@ -89,6 +90,44 @@ class simulation:
     It uses the setattr function to set the verbose attribute of the object self to the value of new_verbose.
     """
     
+    def __grid_to_graph(self, columns = 0, rows = 0):
+        """
+        Generates the graph representation of the given grid network.
+
+        Parameters:
+            columns (int): The number of columns in the grid network. Defaults to 0.
+            rows (int): The number of rows in the grid network. Defaults to 0.
+
+        Returns:
+            None
+        """
+        # separating the gateway position from the nodes' positions
+        gateway_position = self.positions[0] # first position is the gateway
+        node_positions = self.positions[1:] # the rest of the positions are the nodes
+        
+        # create the graph
+        G = nx.Graph()
+        
+        # add the positions of the gateway and the nodes
+        G.add_node("Gateway", pos = gateway_position)
+        for i, pos in enumerate(node_positions):
+            G.add_node(i, pos = pos)
+        
+        # connect each node to the gateway
+        for i in range(len(node_positions)):
+            G.add_edge("Gateway", i)
+            
+        # create a dictionary with the positions of the devices
+        positions_dict = {i: pos for i, pos in enumerate(node_positions)}
+        positions_dict["Gateway"] = gateway_position
+        
+        # draw the graph with the positions of the gateway and the nodes
+        plt.figure(figsize=(columns, rows))
+        nx.draw(G, positions_dict, with_labels = True, node_color = 'skyblue', edge_color='gray')
+        nx.draw_networkx_nodes(G, positions_dict, nodelist=["Gateway"], node_color="red")
+        plt.title("Network Topology of the Gateway and Nodes")
+        plt.savefig('network_topology.png', bbox_inches='tight')
+    
     def __generate_positions(self, columns = 0, rows = 0, devices = 0):
         """
         Generates positions for the nodes in the grid.
@@ -128,6 +167,10 @@ class simulation:
             if self.verbose is True:
                 print(f'Node {i} with IP {i + 2} has position ({temp_position[0]}, {temp_position[1]})')
             self.positions.append((temp_position[0], temp_position[1]))
+        
+        # generate an image of the positions in a graph
+        self.__grid_to_graph(columns, rows)
+        
     
     def __save_metrics(self, ip, throughput, packet_loss, delay):
         """
