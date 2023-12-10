@@ -199,13 +199,13 @@ class simulation:
             print('')
         for node in range(len(self.nodes)):
             # the following metrics are somewhat based on esp32 performance from: https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html
-            throughput = 30 - random.randint(1, 10) # MB/s
+            throughput = 30 - random.randint(1, 10) # Mb/s
             packet_loss = len(self.nodes) - random.randint(1, len(self.nodes)) # %
             distance = math.sqrt((self.positions[node + 1][0] - self.positions[0][0])**2 + (self.positions[node + 1][1] - self.positions[0][1])**2)
             delay = float(10.0 + random.uniform(0.0, distance)) # ms
             
             if self.verbose is True:
-                print(f"Metrics for node {node}: Throughput = {throughput} MB/s, packet loss = {packet_loss}%, delay = {'%.2f' % delay} ms")
+                print(f"Metrics for node {node}: Throughput = {throughput} Mb/s, packet loss = {packet_loss}%, delay = {'%.2f' % delay} ms")
             
             self.__save_metrics(self.nodes[node].get_ip(), throughput, packet_loss, delay)
         if self.verbose is True:
@@ -255,6 +255,7 @@ class simulation:
             None
         """
         print('\n\nStarting simulation...\n')
+        
         self.__create_grid(grid[0], grid[1], self.verbose)
         
         # create gateway

@@ -22,7 +22,7 @@ class gui:
             bool or None: Returns False if the data is greater than or equal to the grid size, otherwise returns None.
         """
         if data >= self.grid_size[0] * self.grid_size[1]:
-            return f'The number of nodes must be lass than the number of columns multiplied by the number of rows, which is {self.grid_size[0] * self.grid_size[1]}'
+            return f'The number of nodes must be less than the number of columns multiplied by the number of rows, which is {self.grid_size[0] * self.grid_size[1]}'
         else:
             return None
                     
