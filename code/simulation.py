@@ -66,9 +66,15 @@ class simulation:
         print('\nGrid:')
         for i in range(len(self.grid)):
             if i == len(self.grid) - 1:
-                print(f'{self.grid[i]}\n')
+                grid_string = f'{self.grid[i]}\n'
             else:
-                print(self.grid[i])
+                grid_string = str(self.grid[i])
+            
+            grid_string = grid_string.replace('[0,', '[ ,')
+            grid_string = grid_string.replace(', 0]', ',  ]')
+            grid_string = grid_string.replace(' 0,', '  ,')
+            grid_string = grid_string.replace(',', ' ')
+            print(grid_string)
     
     def __get_next_ip(self):
         """
