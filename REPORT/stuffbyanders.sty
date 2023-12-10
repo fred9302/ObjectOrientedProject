@@ -1,0 +1,61 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{stuffbyanders}[21/10/2023
+                          v0.1
+                          PLZ WORK]
+
+\PassOptionsToPackage{most}{tcolorbox}
+\RequirePackage{tcolorbox}
+\RequirePackage{xspace}
+\RequirePackage{xcolor}
+
+
+ 
+\AtBeginDocument{
+    \@ifpackageloaded{todonotes}
+    {
+     %If todonotes loaded
+        \@ifpackagewith{todonotes}{disable}
+        %If todonotes is disabled in usepackage option
+            {
+                \newcommand{\note}[2][]{\ignorespaces}
+            }
+            {
+                  \newcommand{\note}[2][Note]{
+                     \begin{tcolorbox}[
+                      enhanced jigsaw, % better frame drawing
+                      borderline west={2pt}{0pt}{red}, % straigh vertical line at the left edge
+                      sharp corners, % No rounded corners
+                      boxrule=0pt, % no real frame,
+                      fonttitle={\large\bfseries},
+                      coltitle={black},  % Black colour for title
+                      title={#1\text{: }},  % Fixed title
+                      attach title to upper, % Move the title into the box
+                      ]
+                      #2
+                      \end{tcolorbox}
+                      \addcontentsline{tdo}{todo}{#1}%
+    }
+            }
+    }
+    {
+        %If todonotes not loaded, we still want the note function, but not place it in list of todo's
+         \newcommand{\note}[2][Note]{
+         \begin{tcolorbox}[
+          enhanced jigsaw, % better frame drawing
+          borderline west={2pt}{0pt}{red}, % straigh vertical line at the left edge
+          sharp corners, % No rounded corners
+          boxrule=0pt, % no real frame,
+          fonttitle={\large\bfseries},
+          coltitle={black},  % Black colour for title
+          title={#1\text{: }},  % Fixed title
+          attach title to upper, % Move the title into the box
+          ]
+          #2
+          \end{tcolorbox}
+    }
+    }
+}
+
+
+
+\newcommand\shortcut[2]{\newcommand#1{#2\xspace}}

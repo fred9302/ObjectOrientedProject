@@ -1,0 +1,1 @@
+{"key":"build_command","value":["latexmk","-pdf","-f","-g","-bibtex","-deps","-synctex=1","-interaction=nonstopmode","-output-directory=/tmp/eb7fd476a2387ff82f320e467dbd0fab63df1153","introduction.tex"]}
