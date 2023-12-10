@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 class simulation:
     def __init__(self):
+        self.clock = None
         self.grid = None
         self.verbose = None
         self.next_ip = 0
@@ -88,13 +89,6 @@ class simulation:
         Returns the value of variable next_ip which is the next available IP address.
         """
         return self.next_ip
-    
-    set_verbose = lambda self, new_verbose: setattr(self, 'verbose', new_verbose)
-    """
-    This code defines a lambda function called set_verbose that takes two parameters: self and new_verbose.
-    
-    It uses the setattr function to set the verbose attribute of the object self to the value of new_verbose.
-    """
     
     def __grid_to_graph(self, columns = 0, rows = 0):
         """
@@ -188,25 +182,6 @@ class simulation:
             delay (float): The delay value for the IP address.
         """
         self.net_metrics[ip] = {'throughput': throughput, 'packet_loss': packet_loss, 'delay': delay}
-
-    def get_net_metrics(self):
-        """
-        Returns the metrics for the nodes in the network.
-        """
-        return self.net_metrics
-    
-    def get_avg_metrics(self, type):
-        """
-        Returns the average metrics for the nodes in the network.
-        """
-        if type == 'throughput':
-            return self.avg_metrics.get(type)
-        elif type == 'packet_loss':
-            return self.avg_metrics.get(type)
-        elif type == 'delay':
-            return self.avg_metrics.get(type)
-        else:
-            return self.avg_metrics
     
     def __generate_metrics(self):
         """
@@ -241,6 +216,32 @@ class simulation:
         self.avg_metrics['packet_loss'] = sum(self.net_metrics[node]['packet_loss'] for node in self.net_metrics) / len(self.net_metrics)
         self.avg_metrics['delay'] = sum(self.net_metrics[node]['delay'] for node in self.net_metrics) / len(self.net_metrics)
         print(f"\nAverage metrics: Throughput = {self.avg_metrics['throughput']} MB/s, packet loss = {self.avg_metrics['packet_loss']}%, delay = {'%.2f' % self.avg_metrics['delay']} ms")
+    
+    set_verbose = lambda self, new_verbose: setattr(self, 'verbose', new_verbose)
+    """
+    This code defines a lambda function called set_verbose that takes two parameters: self and new_verbose.
+    
+    It uses the setattr function to set the verbose attribute of the object self to the value of new_verbose.
+    """
+    
+    def get_net_metrics(self):
+        """
+        Returns the metrics for the nodes in the network.
+        """
+        return self.net_metrics
+    
+    def get_avg_metrics(self, type):
+        """
+        Returns the average metrics for the nodes in the network.
+        """
+        if type == 'throughput':
+            return self.avg_metrics.get(type)
+        elif type == 'packet_loss':
+            return self.avg_metrics.get(type)
+        elif type == 'delay':
+            return self.avg_metrics.get(type)
+        else:
+            return self.avg_metrics
     
     def start_simulation(self, grid = (0, 0), connections = 0):
         """
@@ -305,14 +306,8 @@ class device:
         self.ip = None
         self.type = None
         self.position = None
-        self.type = None
         self.name = None
         super().__init__()
-        
-    """ def establish_connection(self, network):
-        print('Establishing connection...')
-        network.devices.append(self)
-        print('Connection established.') """
     
     def set_ip(self, ip = None):
         """

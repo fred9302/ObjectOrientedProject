@@ -8,14 +8,14 @@ if __name__ == '__main__':
     toggle_gui = str(input("\nUse GUI? y/n: "))
     if toggle_gui == 'y':
         print("\nStarting GUI...\n")
-        gui.set_gui(True)
+        gui.set_toggle_gui(True)
     elif toggle_gui == 'n':
         print("\nIgnoring GUI...\n")
-        gui.set_gui(False)
+        gui.set_toggle_gui(False)
     else:
         exit("\nInvalid input")
         
-    if gui.toggle_gui == True:
+    if gui.get_toggle_gui() == True:
         gui.set_simulation(sim)
         gui.start_gui()
     

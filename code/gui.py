@@ -1,66 +1,16 @@
-import pywebio
 from pywebio.input import *
 from pywebio.output import *
 from pywebio.pin import *
 from pywebio import start_server
-#from simulation import simulation
 
 class gui:
     def __init__(self):
         self.devices = 0
         self.grid_size = [0, 0]
-        self.toggle_gui = None
         self.sim = None
+        self.toggle_gui = None
     
-    set_gui = lambda self, new_gui: setattr(self, 'toggle_gui', new_gui)
-    """
-    This code defines a lambda function called set_gui that takes two parameters: self and new_gui.
-    
-    It uses the setattr function to set the verbose attribute of the object self to the value of new_verbose.
-    """
-    
-    def add_node(self):
-        """
-        Increments the number of nodes in the graph by one, where 256 is the maximum.
 
-        Parameters:
-            None
-
-        Returns:
-            None
-        """
-        if self.devices <= 256:
-            self.devices += 1
-        else:
-            print('Maximum number of nodes reached.')
-    
-    def delete_node(self):
-        """
-        Decreases the number of nodes in the data structure by 1, except when the number of nodes is 0.
-
-        Parameters:
-            None
-
-        Returns:
-            None
-        """
-        if self.devices > 0:
-            self.devices -= 1
-        else:
-            print('Minimum number of nodes reached.')
-
-    def get_nodes(self):
-        """
-        Returns the number of nodes in the network.
-
-        Parameters:
-            None
-
-        Returns:
-            int: The number of nodes in the network.
-        """
-        return self.nodes
-    
     def __check_nodes(self, data):
         """
         Check if the given data is valid for the grid.
@@ -87,6 +37,44 @@ class gui:
         None
         """
         self.grid_size[0] = col
+
+    def __set_rows(self, row):
+        """
+        Sets the number of rows in the grid.
+
+        Parameters:
+        - row: an integer representing the number of rows.
+
+        Returns:
+        None
+        """
+        self.grid_size[1] = row        
+
+    set_toggle_gui = lambda self, new_gui: setattr(self, 'toggle_gui', new_gui)
+    """
+    This code defines a lambda function called set_gui that takes two parameters: self and new_gui.
+    
+    It uses the setattr function to set the toggle_gui attribute of the object self to the value of new_gui.
+    """
+    
+    get_toggle_gui = lambda self: getattr(self, 'toggle_gui')
+    """
+    This code defines a lambda function called get_gui that takes one parameter: self.
+    
+    It uses the getattr function get the toggle_gui attribute of the object self.
+    """
+
+    def get_nodes(self):
+        """
+        Returns the number of nodes in the network.
+
+        Parameters:
+            None
+
+        Returns:
+            int: The number of nodes in the network.
+        """
+        return self.devices
     
     def set_simulation(self, simulation_instance):
         """
@@ -100,19 +88,7 @@ class gui:
         """
         self.sim = simulation_instance
     
-    def __set_rows(self, row):
-        """
-        Sets the number of rows in the grid.
-
-        Parameters:
-        - row: an integer representing the number of rows.
-
-        Returns:
-        None
-        """
-        self.grid_size[1] = row
-    
-    def gui_handler(self):
+    def __gui_handler(self):
         data = input_group("Start parameters",[
             input('Input number of columns in the grid', name='columns', type=NUMBER, required = True, placeholder = '0', validate = self.__set_columns),
             input('Input number of rows in the grid', name='rows', type=NUMBER, required = True, placeholder = '0', validate = self.__set_rows),
@@ -130,7 +106,7 @@ class gui:
         
         put_image(img, width = '500px')
     
-    start_gui = lambda self: start_server(self.gui_handler, port=8080)
+    start_gui = lambda self: start_server(self.__gui_handler, port=8080)
     """
     Starts the web interface.
     
