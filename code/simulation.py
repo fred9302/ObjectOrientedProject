@@ -177,7 +177,6 @@ class simulation:
         # generate an image of the positions in a graph
         self.__grid_to_graph(columns, rows)
         
-    
     def __save_metrics(self, ip, throughput, packet_loss, delay):
         """
         Saves the metrics for a given IP address.

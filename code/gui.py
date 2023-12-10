@@ -114,17 +114,21 @@ class gui:
     
     def gui_handler(self):
         data = input_group("Start parameters",[
-            put_input('Input number of columns in the grid', name='columns', type=NUMBER, required = True, placeholder = '0', validate = self.__set_columns),
-            put_input('Input number of rows in the grid', name='rows', type=NUMBER, required = True, placeholder = '0', validate = self.__set_rows),
-            put_input('Input the number of nodes in the network', name='nodes', type=NUMBER, required = True, placeholder = '0', validate = self.__check_nodes),
+            input('Input number of columns in the grid', name='columns', type=NUMBER, required = True, placeholder = '0', validate = self.__set_columns),
+            input('Input number of rows in the grid', name='rows', type=NUMBER, required = True, placeholder = '0', validate = self.__set_rows),
+            input('Input the number of nodes in the network', name='nodes', type=NUMBER, required = True, placeholder = '0', validate = self.__check_nodes),
         ])
         self.devices = data['nodes']
         
         self.sim.start_simulation((data['columns'], data['rows']), data['nodes'])
         
+        img = open('./network_topology.png', 'rb').read()
+        
         put_text(f"Average throughput: {self.sim.get_avg_metrics('throughput')} MB/s")
-        put_text(f"Average packet loss: {self.sim.get_avg_metrics('packet_loss')} %")
+        put_text(f"Average packet loss: {'%.2f' % self.sim.get_avg_metrics('packet_loss')} %")
         put_text(f"Average delay: {self.sim.get_avg_metrics('delay')} ms")
+        
+        put_image(img, width = '500px')
     
     start_gui = lambda self: start_server(self.gui_handler, port=8080)
     """
