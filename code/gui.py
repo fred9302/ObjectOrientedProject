@@ -9,6 +9,7 @@ class gui:
         self.grid_size = [0, 0]
         self.sim = None
         self.toggle_gui = None
+        self.allow_run = True
     
 
     def __check_nodes(self, data):
@@ -89,22 +90,28 @@ class gui:
         self.sim = simulation_instance
     
     def __gui_handler(self):
-        data = input_group("Start parameters",[
-            input('Input number of columns in the grid', name='columns', type=NUMBER, required = True, placeholder = '0', validate = self.__set_columns),
-            input('Input number of rows in the grid', name='rows', type=NUMBER, required = True, placeholder = '0', validate = self.__set_rows),
-            input('Input the number of nodes in the network', name='nodes', type=NUMBER, required = True, placeholder = '0', validate = self.__check_nodes),
-        ])
-        self.devices = data['nodes']
+        if self.allow_run == True:
+            data = input_group("Start parameters",[
+                input('Input number of columns in the grid', name='columns', type=NUMBER, required = True, placeholder = '0', validate = self.__set_columns),
+                input('Input number of rows in the grid', name='rows', type=NUMBER, required = True, placeholder = '0', validate = self.__set_rows),
+                input('Input the number of nodes in the network', name='nodes', type=NUMBER, required = True, placeholder = '0', validate = self.__check_nodes),
+            ])
+            self.devices = data['nodes']
         
-        self.sim.start_simulation((data['columns'], data['rows']), data['nodes'])
+            self.sim.start_simulation((data['columns'], data['rows']), data['nodes'])
+              
+            img = open('./network_topology.png', 'rb').read()
         
-        img = open('./network_topology.png', 'rb').read()
+            put_text(f"Average throughput: {self.sim.get_avg_metrics('throughput')} MB/s")
+            put_text(f"Average packet loss: {'%.2f' % self.sim.get_avg_metrics('packet_loss')} %")
+            put_text(f"Average delay: {self.sim.get_avg_metrics('delay')} ms")
         
-        put_text(f"Average throughput: {self.sim.get_avg_metrics('throughput')} MB/s")
-        put_text(f"Average packet loss: {'%.2f' % self.sim.get_avg_metrics('packet_loss')} %")
-        put_text(f"Average delay: {self.sim.get_avg_metrics('delay')} ms")
+            put_image(img, width = '500px')
+            
+            self.allow_run = False
         
-        put_image(img, width = '500px')
+        else:
+            put_text("Run the python file again to redo the simulation.")
     
     start_gui = lambda self: start_server(self.__gui_handler, port=8080)
     """
