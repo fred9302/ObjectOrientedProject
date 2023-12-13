@@ -1,0 +1,24 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Analysis}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Defining use cases}{3}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Actors}{3}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Use cases}{3}{subsection.2.1.2}%
+\contentsline {subsubsection}{Add node}{3}{subsubsection*.3}%
+\contentsline {subsubsection}{Start Simulation}{3}{subsubsection*.4}%
+\contentsline {subsubsection}{See simulation statistics}{4}{subsubsection*.5}%
+\contentsline {subsection}{\numberline {2.1.3}Use case diagram}{4}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}FURPS}{4}{subsection.2.1.4}%
+\contentsline {subsubsection}{Functionality: what should the system do?}{4}{subsubsection*.6}%
+\contentsline {subsubsection}{Usability: what kind of UI is needed?}{4}{subsubsection*.7}%
+\contentsline {subsubsection}{Reliability: what is the tolerance of the system to failures?}{4}{subsubsection*.8}%
+\contentsline {subsubsection}{Performance: which response times, accuracy, availability, resource usage should the system have?}{4}{subsubsection*.9}%
+\contentsline {subsubsection}{Sustainability: what adaptations may be needed?}{4}{subsubsection*.10}%
+\contentsline {section}{\numberline {2.2}Domain model}{5}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Class diagram}{5}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}GUI}{5}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Simulation}{5}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Network}{5}{subsection.2.3.3}%
+\contentsline {subsubsection}{Device}{5}{subsubsection*.12}%
+\contentsline {paragraph}{Node}{5}{paragraph*.13}%
+\contentsline {paragraph}{Gateway}{5}{paragraph*.14}%

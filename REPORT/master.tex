@@ -18,8 +18,6 @@
 \input{setup/hyphenations.tex}% 
 \input{setup/macros.tex}% my new macros
 
-\graphicspath{{figures/}}
-
 
 \begin{document}
 %frontmatter
@@ -35,6 +33,7 @@
 %mainmatter
 \pagenumbering{arabic} %use arabic page numbering in the mainmatter
 
+\graphicspath{{figures/}}
 
 %%%%%% SECTIONS
 
@@ -47,8 +46,9 @@
 
 
 
-\printbibliography[heading=bibintoc]
-\label{bib:mybiblio}
+%\printbibliography[heading=bibintoc]
+%\label{bib:mybiblio}
 %\appendix
 %\input{sections/appAname.tex}
+
 \end{document}
