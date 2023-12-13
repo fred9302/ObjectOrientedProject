@@ -18,14 +18,12 @@ When the user wants to add the node, they would need to specify the type of node
 When the user wants to start the simulation, they would need to provide the following information:
 \begin{itemize}
     \item Number of nodes in the network 
-    \item Size of the 2d grid where the nodes will be placed
+    \item Size of the 2D grid where the nodes will be placed
     \item Option of verbose output
 \end{itemize}
 
 \subsubsection{See simulation statistics}
-When the user wants to see simulation statistics, the system would need to check if any simulation has occurred previously. If there is no prior simulation, then the system would display an error. Otherwise , the system would display the simulation statistics such as ...
-
-\todo{Frederik to fill up the output of the statistics}
+When the user wants to see simulation statistics, the system would need to check if any simulation has occurred previously. If there is no prior simulation, then the system would display an error. Otherwise, the system would display the simulation statistics such as throughput, delay, and packet loss.
 
 \subsection{Use case diagram}
 Based on the factors mentioned above, a use case diagram was developed. The use case diagram can be seen below.
@@ -69,6 +67,13 @@ The FURPS were utilized to better define the system's requirements. The system's
 \end{itemize}
 
 \section{Domain model}
-To aid the group in identifying the various objects involved in the problem, a domain model was developed. Firstly, the identified actor, which is the user, is represented as a GUI in the model. This also constitutes the front end of the system. Regarding the back end of the system, we would need one object to simulate the network and another one to generate the simulation statistics. Ultimately, we would need an object for the node itself and one for the overall network.
+To aid the group in identifying the various objects involved in the problem, a domain model was developed. Firstly, the identified actor, which is the user, is represented as a GUI in the model. This also constitutes the front end of the system. Regarding the back end of the system, we would need one object to simulate the network and another one to generate the simulation statistics. Ultimately, we would need an object for the node itself and one for the overall network. Here it might also be a viable option to differentiate between a node object and a gateway object that then both can inherit attributes and methods from the device object when making the class diagram.
 
-\todo{Add in the domain model. Domain model would be a class diagram without the attributes etc}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{Domain_model.pdf}
+\caption{Diagram of the domain model.}
+\label{fig:Domain_model}
+\end{figure}
+
+
