@@ -1093,13 +1093,18 @@ INPUT ./figures//Domain_model.pdf
 INPUT ./figures//Domain_model.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplr9e.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb9e.tfm
-OUTPUT master.thm
+INPUT ./figures//UML class diagram.pdf
+INPUT ./figures//UML class diagram.pdf
+INPUT figures//UML class diagram.pdf
+INPUT ./figures//UML class diagram.pdf
+INPUT ./figures//UML class diagram.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplb9e.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/mathpazo/fplmb.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplr9e.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/mathpazo/fplmr.tfm
+OUTPUT master.thm
 INPUT master.aux
 INPUT ./master.out
 INPUT ./master.out
