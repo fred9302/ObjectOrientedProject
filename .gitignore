@@ -1,3 +1,4 @@
 /code/database.ini
 database.ini
 /code/__pycache__
+/code/__pycache__/*
