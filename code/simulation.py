@@ -326,6 +326,8 @@ class device:
                 self.name = f'Gateway {self.ip - 1}'
             elif self.type == 1:
                 self.name = f'Node {self.ip - 2}'
+            else:
+                exit('Invalid device type')
         else:
             print('No IP address provided.')
     
