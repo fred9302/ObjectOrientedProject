@@ -77,7 +77,7 @@ To aid the group in identifying the various objects involved in the problem, a d
 \end{figure}
 
 \section{Class diagram}
-The entirety of the class diagram can be seen in \autoref{fig:Class_diagram}. The parts that were not implemented have their text colored red. This also implies that the class diagram is made in accordance to how the implementation has been done
+The entirety of the class diagram can be seen in \autoref{fig:Class_diagram}. The parts that were not implemented have their text colored red. This also implies that the class diagram is made in accordance to how the implementation has been done, where it then has been changed whenever something has been changed in the program itself.
 
 \begin{figure}[H]
   \centering
@@ -86,15 +86,14 @@ The entirety of the class diagram can be seen in \autoref{fig:Class_diagram}. Th
   \label{fig:Class_diagram}
 \end{figure}
 
-
-\subsection{GUI}
-
-
-\subsection{Simulation}
-
+\subsection{GUI} It needs to be possible for the rest of the system to function without a GUI, which will also make it easier to test whether the rest of the program functions as expected. Since this is also the object that the user will interact with, it should also be somewhat easy to use. In order to start the GUI itself a \code{start\_gui} method is needed that can then be called from the main program file. Since PyWebIO is used to program the GUI, the built-in method, called \code{start\_server} can then be called to open a port on the transport layer, which then in turn can be used to access the GUI from any other computer with network access to the computer executing the program. When \code{start\_server} is called, another method can be passed along as an argument, which is then how the GUI is controlled for the remaining time. This method is called \code{gui\_handler}, and it decides which elements of the GUI is shown as well as receiving input from the user and calling other methods of the \code{gui} object.
 
 \subsection{Network}
+This class is missing a lot of the attributes and methods that it should have managed instead of the \code{simulation} object. As it is currently implemented, the \code{network} object only stores a list of the IP-addresses that are currently reserved by the gateway or one of the nodes.\bigbreak
 
+\noindent Conventionally, on local networks, only the digits after the last period in the IP-addresses differentiate the different devices in the network. Therefore, it is only necessary to store the differentiating part of the IP-addresses. This means that the attribute \code{connections} must be able to contain a list of integers from 1 to some maximum number of devices in the network. Additionally the simulation ended up being in charge of creating connections between the gateway and the nodes, even though this should definitively have been a method of the \code{device} object that \code{node} and \code{gateway} would then have been able to use to reserve an IP-address in the \code{connections} attribute of the \code{network} object.\newline
+
+\noindent To put it differently, the \code{network} object should have more coupling to make it more clear that it is in charge of the network functionality, that its name is implying. Even though the \code{simulation} is necessary, it should have been possible to view all of the network methods and attributes in the \code{network} object instead of needing to also view the \code{simulation} object.
 
 \subsection{Device}
 
@@ -103,6 +102,37 @@ The entirety of the class diagram can be seen in \autoref{fig:Class_diagram}. Th
 
 
 \subsubsection{Gateway}
+
+
+\subsection{Simulation}
+The simulation is the object that takes over right after getting called by the \code{gui} object. It is then in charge of controlling the simulation. The first thing that happens is then that the \code{start\_simulation} method is accessed by the \code{gui\_handler} method which passes on the input from the user, namely the attributes \code{devices}, and \code{grid\_size}. By called its own method \code{simulation} can then use \code{create\_grid} to create an empty grid of the size specified by the previously mentioned attributes.\bigbreak
+
+\noindent Right after creating the empty grid, the \code{gateway} object is instantiated, it gets the IP-address 1 by using calling the \code{get\_next\_ip} method, and its position is then set to the middle of the empty grid and stored both in the \code{gateway} object as well as the \code{simulation} object. Even though it was implemented this way it should only have been stored in the \code{gateway} object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

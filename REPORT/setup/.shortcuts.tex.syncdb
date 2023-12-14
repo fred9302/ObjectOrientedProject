@@ -1,0 +1,1 @@
+{"key":"build_command","value":["latexmk","-pdf","-f","-g","-bibtex","-deps","-synctex=1","-interaction=nonstopmode","-output-directory=/tmp/1f59c5190d12b97a39ab7b271171ce06248e9fda","shortcuts.tex"]}
