@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.10.4)  15 DEC 2023 12:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.10.4)  15 DEC 2023 14:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1140,7 +1140,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 pdfTeX warning: pdflatex (file ./figures//Domain_model.pdf): PDF inclusion: fou
 nd PDF version <1.7>, but at most version <1.5> allowed
-<figures//Domain_model.pdf, id=194, 546.9434pt x 330.13336pt>
+<figures//Domain_model.pdf, id=199, 546.9434pt x 330.13336pt>
 File: figures//Domain_model.pdf Graphic file (type pdf)
 <use figures//Domain_model.pdf>
 Package pdftex.def Info: figures//Domain_model.pdf  used on input line 74.
@@ -1149,7 +1149,7 @@ Package pdftex.def Info: figures//Domain_model.pdf  used on input line 74.
 
 pdfTeX warning: pdflatex (file ./figures//UML class diagram.pdf): PDF inclusion
 : found PDF version <1.7>, but at most version <1.5> allowed
-<figures//UML class diagram.pdf, id=196, 877.17715pt x 623.73027pt>
+<figures//UML class diagram.pdf, id=201, 877.17715pt x 623.73027pt>
 File: figures//UML class diagram.pdf Graphic file (type pdf)
 <use figures//UML class diagram.pdf>
 Package pdftex.def Info: figures//UML class diagram.pdf  used on input line 84.
@@ -1202,27 +1202,42 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [8]
 Chapter 3.
-<figures//GUI_screenshot_1.pdf, id=265, 673.76718pt x 268.00125pt>
+<figures//GUI_screenshot_1.pdf, id=272, 673.76718pt x 268.00125pt>
 File: figures//GUI_screenshot_1.pdf Graphic file (type pdf)
 <use figures//GUI_screenshot_1.pdf>
 Package pdftex.def Info: figures//GUI_screenshot_1.pdf  used on input line 9.
 (pdftex.def)             Requested size: 394.35252pt x 156.85983pt.
-<figures//GUI_screenshot_2.pdf, id=268, 259.7203pt x 73.77562pt>
+<figures//GUI_screenshot_2.pdf, id=275, 259.7203pt x 73.77562pt>
 File: figures//GUI_screenshot_2.pdf Graphic file (type pdf)
 <use figures//GUI_screenshot_2.pdf>
 Package pdftex.def Info: figures//GUI_screenshot_2.pdf  used on input line 18.
 (pdftex.def)             Requested size: 219.08623pt x 62.23337pt.
-[9
 
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
- <./figures//GUI_screenshot_1.pdf>]
-<figures//network_topology_example.pdf, id=279, 767.11594pt x 784.43062pt>
+<figures//network_topology_example.pdf, id=276, 767.11594pt x 784.43062pt>
 File: figures//network_topology_example.pdf Graphic file (type pdf)
 <use figures//network_topology_example.pdf>
 Package pdftex.def Info: figures//network_topology_example.pdf  used on input l
 ine 25.
 (pdftex.def)             Requested size: 262.90614pt x 264.15517pt.
-)
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[9
+
+
+ <./figures//GUI_screenshot_1.pdf>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[10 <./figures//network_topology_example.pdf> <./figures//GUI_screenshot_2.pdf>
+])
 \tf@thm=\write7
 \openout7 = `master.thm'.
 
@@ -1236,16 +1251,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[10 <./figures//network_topology_example.pdf> <./figures//GUI_screenshot_2.pdf>
-] (./master.aux)
+[11] (./master.aux)
 Package rerunfilecheck Info: File `master.out' has not changed.
-(rerunfilecheck)             Checksum: 750DBC401348D5D8FA95360EA6216B28;2630.
+(rerunfilecheck)             Checksum: 0AD3C3BB630DFD6B1C9D889795740C67;2866.
  ) 
 Here is how much of TeX's memory you used:
- 31801 strings out of 478287
- 628375 string characters out of 5849289
+ 31805 strings out of 478287
+ 628433 string characters out of 5849289
  950202 words of memory out of 5000000
- 49335 multiletter control sequences out of 15000+600000
+ 49336 multiletter control sequences out of 15000+600000
  505172 words of font info for 83 fonts, out of 8000000 for 9000
  1146 hyphenation exceptions out of 8191
  104i,11n,113p,1323b,460s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1253,10 +1267,10 @@ Here is how much of TeX's memory you used:
 e/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf/fonts/type1/public/c
 m-super/sftt1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/up
 lb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on master.pdf (14 pages, 217323 bytes).
+Output written on master.pdf (15 pages, 222440 bytes).
 PDF statistics:
- 324 PDF objects out of 1000 (max. 8388607)
- 264 compressed objects within 3 object streams
- 53 named destinations out of 1000 (max. 500000)
- 356 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 337 PDF objects out of 1000 (max. 8388607)
+ 276 compressed objects within 3 object streams
+ 56 named destinations out of 1000 (max. 500000)
+ 364 words of extra memory for PDF output out of 10000 (max. 10000000)
 
