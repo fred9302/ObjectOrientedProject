@@ -1261,10 +1261,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/mathpazo/fplmb.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplr9e.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/mathpazo/fplmr.tfm
-INPUT ./master.tdo
-INPUT master.tdo
-INPUT master.tdo
-OUTPUT master.tdo
 INPUT ./sections/introduction.tex
 INPUT sections/introduction.tex
 INPUT ./sections/introduction.tex
