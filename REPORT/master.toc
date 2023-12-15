@@ -23,3 +23,9 @@
 \contentsline {subsubsection}{Gateway}{7}{subsubsection*.14}%
 \contentsline {subsection}{\numberline {2.3.4}Simulation}{7}{subsection.2.3.4}%
 \contentsline {chapter}{\numberline {3}Discussion}{9}{chapter.3}%
+\contentsline {section}{\numberline {3.1}GUI}{9}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Network}{9}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Device}{9}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Node}{9}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Gateway}{9}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Simulation}{9}{section.3.4}%
