@@ -102,9 +102,9 @@ class gui:
               
             img = open('./network_topology.png', 'rb').read()
         
-            put_text(f"Average throughput: {self.sim.get_avg_metrics('throughput')} MB/s")
+            put_text(f"Average throughput: {self.sim.get_avg_metrics('throughput')} Mb/s")
             put_text(f"Average packet loss: {'%.2f' % self.sim.get_avg_metrics('packet_loss')} %")
-            put_text(f"Average delay: {self.sim.get_avg_metrics('delay')} ms")
+            put_text(f"Average delay: {'%.2f' % self.sim.get_avg_metrics('delay')} ms")
         
             put_image(img, width = '500px')
             
