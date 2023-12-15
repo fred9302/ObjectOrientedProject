@@ -1334,6 +1334,11 @@ INPUT ./figures//GUI_screenshot_2.pdf
 INPUT figures//GUI_screenshot_2.pdf
 INPUT ./figures//GUI_screenshot_2.pdf
 INPUT ./figures//GUI_screenshot_2.pdf
+INPUT ./figures//network_topology_example.pdf
+INPUT ./figures//network_topology_example.pdf
+INPUT figures//network_topology_example.pdf
+INPUT ./figures//network_topology_example.pdf
+INPUT ./figures//network_topology_example.pdf
 OUTPUT master.thm
 INPUT master.aux
 INPUT ./master.out
