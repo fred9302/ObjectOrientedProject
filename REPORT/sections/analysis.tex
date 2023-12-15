@@ -9,17 +9,25 @@ Based on the description given, actors and use cases are identified and then cle
 Based on the project description provided, the only actor that we have found would be the user who is running the simulation. At first we had considered the database to be an actor of the system but later discovered that it would not be that appropriate to have the database as an actor to the system.
 
 \subsection{Use cases}
-Next, we have defined the various use cases that we want the user to be able to do, which will be described in the following sections.
+Next, we have defined the various use cases that we want the user to be able to do, which will be described in the following sections and shown in \autoref{fig:Use_case_diagram}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{Use_case_diagram.pdf}
+  \caption{The use case diagram of the system.}
+  \label{fig:Use_case_diagram}
+\end{figure}
+
 
 \subsubsection{Add node}
-When the user wants to add the node, they would need to specify the type of node added. The node added could be either a IoT Node or a network gateway.
+When the user wants to add the node, they would need to specify the type of node added. The node added could be either an IoT Node or a network gateway.
 
 \subsubsection{Start Simulation}
 When the user wants to start the simulation, they would need to provide the following information:
 \begin{itemize}
-  \item Number of nodes in the network
-  \item Size of the 2D grid where the nodes will be placed
-  \item Option of verbose output
+  \item Number of nodes in the network.
+  \item Size of the 2D grid where the nodes will be placed.
+  \item Option of verbose output.
 \end{itemize}
 
 \subsubsection{See simulation statistics}
@@ -29,41 +37,38 @@ When the user wants to see simulation statistics, the system would need to check
 Based on the factors mentioned above, a use case diagram was developed. The use case diagram can be seen below.
 
 \subsection{FURPS}
+The FURPS were utilized to better define the system's requirements. The system's overall summary was also created using this technique.
 
-The FURPS were utilized to better define the system's requirements. The system's overall summary was also created using this technique. This approach also aided in providing a fresh and more enlightening perspective on the issue and the requirements.
-
-\subsubsection{Functionality: what should the system do?}
+\subsubsection{Functionality: What should the system do?}
 \begin{itemize}
   \item The system should be able to place the nodes in a grid and transmit packets from one node to the gateway.
-
-        %\item The system would need to place different type of nodes in the network
-
-  \item The system would need to run the simulation for a fixed amount of time
-
-
+    \begin{itemize}
+        \item[$\circ$] The system would need to place different type of nodes or devices in the network.
+    \end{itemize}
+  \item The system would need to run the simulation for a fixed amount of time or a fixed amount of network events.
 \end{itemize}
 
 \subsubsection{Usability: what kind of UI is needed?}
 \begin{itemize}
-  \item A screen would be required to display the simulation statistics
-  \item A device should receive user input eg.keyboard
+  \item A screen would be required to display the simulation statistics.
+  \item A device should receive user input (e.g. keyboard).
 \end{itemize}
 
-\subsubsection{Reliability: what is the tolerance of the system to failures?}
+\subsubsection{Reliability: What is the tolerance of the system to failures?}
 \begin{itemize}
-  \item The system should be able to check if the simulation has been run before displaying simulation statistics
+  \item The system should be able to check if the simulation has been run before displaying simulation statistics.
 \end{itemize}
 
-\subsubsection{Performance: which response times, accuracy, availability, resource usage should the system have?}
+\subsubsection{Performance: Which response times, accuracy, availability, resource usage should the system have?}
 
 \begin{itemize}
-  \item The GUI needs to be run on a simple computer
-  \item The simulation statistics needs to be stored in a server
+  \item The GUI needs to be run on a simple computer.
+  \item The simulation statistics needs to be stored in a server with a database.
 \end{itemize}
 
 \subsubsection{Sustainability: what adaptations may be needed?}
 \begin{itemize}
-  \item The system need to give the user the ability to change the simulation conditions after a run has been completed
+  \item The system need to give the user the ability to change the simulation conditions after a run has been completed.
 \end{itemize}
 
 \section{Domain model}
@@ -71,7 +76,7 @@ To aid the group in identifying the various objects involved in the problem, a d
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{Domain_model.pdf}
+  \includegraphics[width=0.8\textwidth]{Domain_model.pdf}
   \caption{Diagram of the domain model.}
   \label{fig:Domain_model}
 \end{figure}

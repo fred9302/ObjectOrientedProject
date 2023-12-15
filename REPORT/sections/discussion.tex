@@ -36,7 +36,7 @@ Since the \code{network} is supposed to have as much cohesion as possible, it sh
 
 
 \section{Device}
-If the simulation had been implemented as an event based network simulator, where each event would take an amount of time that would then be summed after the simulation has finished, it would also make sense to enable instances of both the \code{node} and \code{gateway} objects to send and receive data over the network. Therefore, methods to send a receive data, should be included in the \code{device} object that then will be inherited by both the \code{node} and \code{gateway} objects. Along with these methods, there should also be attributes, where said data can be stored temporarily or maybe even until the simulation finishes.
+If the simulation had been implemented as an event based network simulator, where each event would take an amount of time that would then be summed after the simulation has finished, it would also make sense to enable instances of both the \code{node} and \code{gateway} objects to send and receive data over the network. Therefore, methods to send and receive data, should be included in the \code{device} object that then will be inherited by both the \code{node} and \code{gateway} objects. Along with these methods, there should also be attributes, where said data can be stored temporarily or maybe even until the simulation finishes.
 
 
 \subsection{Node}
@@ -48,6 +48,7 @@ As of the current implementation, the \code{gateway} is a subclass of both the \
 
 
 \section{Simulation}
+As can be seen in \autoref{fig:Class_diagram}, the \code{simulation} is the object that by far had most implemented methods and attributes. But no method to keep track of time or events was implemented. The method \code{add\_time} is then supposed to take an argument with how much time should be added to the total amount of elapsed time stored in the atribute \code{clock}. The idea of what unit of time should be used, was that it should just be an arbitrary unit based on integers in order to make it easier to implement on a computer. This would also enable the simulation to run faster instead of basing the duration of each event of the simulation on something like Pythons time library, where a start time would be recorded at the beginning of an event, which would then be subtracted from a timestamp recorded at the end of the given event.
 
 
 
